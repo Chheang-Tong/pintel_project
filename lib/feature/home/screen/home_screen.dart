@@ -50,7 +50,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Spacer(),
-                    SvgPicture.asset('assets/image/share.svg'),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.cartScreen);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorResources.whiteColor,
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/image/cart.svg',
+                          color: ColorResources.blackColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Container(

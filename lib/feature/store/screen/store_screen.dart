@@ -21,9 +21,17 @@ class _StoreScreenState extends State<StoreScreen>
     'Map',
     'Contact',
   ];
+  final List<Widget> tabViews = const [
+    PostWidget(),
+    ServiceWidget(),
+    AboutWidget(),
+    MapWidget(),
+    ContactWidget(),
+  ];
+
   @override
   void initState() {
-    tabController = TabController(length: 5, vsync: this);
+    tabController = TabController(length: list.length, vsync: this);
     super.initState();
   }
 
@@ -53,11 +61,7 @@ class _StoreScreenState extends State<StoreScreen>
       controller: controller,
       slivers: [
         appBar(),
-        if (selectedIndex == 0) PostWidget(),
-        if (selectedIndex == 1) ServiceWidget(),
-        if (selectedIndex == 2) AboutWidget(),
-        if (selectedIndex == 3) MapWidget(),
-        if (selectedIndex == 4) ContactWidget(),
+        tabViews[selectedIndex],
       ],
     );
   }
@@ -77,6 +81,11 @@ class _StoreScreenState extends State<StoreScreen>
       onCollapsed: onCollapsed,
       onTap: (int index) {
         setState(() => selectedIndex = index);
+        controller.animateTo(
+          0,
+          duration: const Duration(milliseconds: 3),
+          curve: Curves.fastOutSlowIn,
+        );//to make the scroll to top
       },
       selectedIndex: selectedIndex,
       url:

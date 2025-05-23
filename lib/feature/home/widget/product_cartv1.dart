@@ -17,8 +17,8 @@ class ProductCartV1 extends StatelessWidget {
       width: size.width,
       height: size.height,
       decoration: BoxDecoration(
-        color: ColorResources.whiteColor.withOpacity(0.45),
-        borderRadius: BorderRadius.circular(16),
+        color: ColorResources.white45,
+        borderRadius: BorderRadius.circular(Dimensions.smallRadius),
       ),
       child: Column(
         children: [
@@ -26,7 +26,7 @@ class ProductCartV1 extends StatelessWidget {
             margin: EdgeInsets.all(12),
             height: size.height * 0.124,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(4),
               image: DecorationImage(
                 image: AssetImage('assets/image/image.png'),
               ),
@@ -42,7 +42,8 @@ class ProductCartV1 extends StatelessWidget {
                     width: 39,
                     height: 18,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.smallRadius),
                       color: ColorResources.primaryColor,
                     ),
                     child: Center(
@@ -61,9 +62,10 @@ class ProductCartV1 extends StatelessWidget {
                   child: Container(
                     height: 24,
                     width: 24,
-                    padding: EdgeInsets.all(3),
+                    padding: EdgeInsets.all(Dimensions.extrasmallRadius),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.smallRadius),
                       color: ColorResources.whiteColor.withOpacity(0.25),
                     ),
                     child: Center(
@@ -78,7 +80,8 @@ class ProductCartV1 extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(
+                horizontal: Dimensions.mediumPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -159,11 +162,10 @@ class ProductCartV1 extends StatelessWidget {
                 onTap: () {},
                 child: Container(
                   margin: EdgeInsets.only(
-                    bottom: 12,
-                    right: 12,
+                    bottom: Dimensions.mediumMagin,
+                    right: Dimensions.mediumMagin,
                   ),
-                  height: 24,
-                  width: 24,
+                  padding: EdgeInsets.all(Dimensions.extrasmallPadding),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),

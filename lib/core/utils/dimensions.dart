@@ -9,7 +9,7 @@ class Dimensions {
   static const double fontLarge = 14.00;
   static const double fontMediumLarge = 16.00;
   static const double fontExtraLarge = 19.00;
-  static const double fontOverLarge = 21.00;
+  static const double fontOverLarge = 20.00;
   static const double fontMegaLarge = 28.00;
 
   static const double defaultButtonH = 45;
@@ -62,10 +62,12 @@ class Dimensions {
 
   static const double extrasmallPadding = 4;
   static const double smallPadding = 8;
+  static const double mediumPadding = 12;
   static const double largePadding = 16;
 
   static const double extrasmallMagin = 4;
   static const double smallMagin = 8;
+  static const double mediumMagin = 12;
   static const double largeMagin = 16;
 
   static const double expandedHeights = 350.0;

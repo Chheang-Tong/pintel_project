@@ -50,28 +50,36 @@ class AppBars extends SliverAppBar {
     return PreferredSize(
       preferredSize: const Size.fromHeight(6),
       child: Container(
-        color: ColorResources.bgColor,
+        color: ColorResources.transparentColor,
         width: MediaQuery.of(context).size.width,
         child: TabBar(
           padding: EdgeInsets.symmetric(horizontal: 8),
           labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey[600],
+          unselectedLabelColor: ColorResources.black75,
+          overlayColor: MaterialStateProperty.all(
+            ColorResources.transparentColor,
+          ),
+          splashFactory: NoSplash.splashFactory,
           indicator: BoxDecoration(
-            color: Colors.grey[300],
+            color: ColorResources.black10,
+            shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(10),
           ),
+          labelPadding: EdgeInsets.symmetric(horizontal: 8),
           indicatorSize: TabBarIndicatorSize.tab,
-          indicatorWeight: 2,
-          indicatorPadding: EdgeInsets.symmetric(vertical: 4),
-          automaticIndicatorColorAdjustment: true,
-          isScrollable: true,
+          indicatorWeight: 1,
+          indicatorPadding: EdgeInsets.symmetric(vertical: 6),
+          automaticIndicatorColorAdjustment: false,
           controller: tabController,
           tabs: [
-            Tab(child: Text('Post')),
-            Tab(child: Text('Service')),
-            Tab(child: Text('About')),
-            Tab(child: Text('Map')),
-            Tab(child: Text('Contact')),
+            ...List.generate(
+              length,
+              (index) => Tab(
+                child: Text(
+                  text[index],
+                ),
+              ),
+            )
           ],
           onTap: onTap,
         ),
@@ -97,7 +105,6 @@ class AppBars extends SliverAppBar {
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
           onCollapsed(collapsedHight != top);
         });
-
         return FlexibleSpaceBar(
           collapseMode: CollapseMode.pin,
           background: Column(

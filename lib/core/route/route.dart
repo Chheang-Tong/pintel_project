@@ -6,7 +6,7 @@ import '../../feature/feature.dart';
 class RouteHelper {
   static const String splashScreen = "/splash_screen";
   static const String onboardScreen = '/onboard_screen';
-  static const String loginScreen = "/login_screen";
+  static const String authScreen = "/auth_screen";
   static const String forgotPasswordScreen = "/forgot_password_screen";
 
   static const String loginNavbar = '/login_navbar';
@@ -19,7 +19,7 @@ class RouteHelper {
   static const String addCustomerScreen = "/add_customer_screen";
   static const String updateCustomerScreen = "/update_customer_screen";
   static const String addContactScreen = "/add_contact_screen";
-  static const String projectScreen = "/project_screen";
+  static const String cartScreen = "/cart_screen";
   static const String projectDetailsScreen = "/project_details_screen";
   static const String addProjectScreen = "/add_project_screen";
   static const String updateProjectScreen = "/update_project_screen";
@@ -67,7 +67,7 @@ class RouteHelper {
       curve: Curves.fastEaseInToSlowEaseOut,
     ),
     //   GetPage(name: onboardScreen, page: () => const OnBoardIntroScreen()),
-    //   GetPage(name: loginScreen, page: () => const LoginScreen()),
+      GetPage(name: authScreen, page: () => const AuthScreen()),
     //   GetPage(
     //       name: forgotPasswordScreen, page: () => const ForgetPasswordScreen()),
     GetPage(
@@ -83,6 +83,7 @@ class RouteHelper {
       page: () => FilterScreen(),
       transition: Transition.rightToLeft,
     ),
+      GetPage(name: cartScreen, page: () => const CartScreen()),
     //   GetPage(name: customerScreen, page: () => const CustomersScreen()),
     //   GetPage(
     //       name: customerDetailsScreen,
@@ -94,7 +95,6 @@ class RouteHelper {
     //   GetPage(
     //       name: updateCustomerScreen,
     //       page: () => UpdateCustomerScreen(id: Get.arguments)),
-    //   GetPage(name: projectScreen, page: () => const ProjectsScreen()),
     //   GetPage(
     //       name: projectDetailsScreen,
     //       page: () => ProjectDetailsScreen(id: Get.arguments)),

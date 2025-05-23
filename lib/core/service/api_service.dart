@@ -67,7 +67,7 @@ class ApiClient extends GetxService {
             sharedPreferences.setBool(
                 SharedPreferenceHelper.rememberMeKey, false);
             sharedPreferences.remove(SharedPreferenceHelper.token);
-            Get.offAllNamed(RouteHelper.loginScreen);
+            Get.offAllNamed(RouteHelper.authScreen);
           }
         } catch (e) {
           e.toString();
@@ -76,7 +76,7 @@ class ApiClient extends GetxService {
         return ResponseModel(true, model.message!.tr, response.body);
       } else if (response.statusCode == 401) {
         sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
-        Get.offAllNamed(RouteHelper.loginScreen);
+        Get.offAllNamed(RouteHelper.authScreen);
         return ResponseModel(false, model.message!.tr, response.body);
       } else if (response.statusCode == 404) {
         return ResponseModel(false, model.message!.tr, response.body);
@@ -91,7 +91,7 @@ class ApiClient extends GetxService {
       return ResponseModel(false, LocalStrings.somethingWentWrong.tr, '');
     } on FormatException {
       sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
-      Get.offAllNamed(RouteHelper.loginScreen);
+      Get.offAllNamed(RouteHelper.authScreen);
       return ResponseModel(false, LocalStrings.badResponseMsg.tr, '');
     } catch (e) {
       return ResponseModel(false, e.toString(), '');
