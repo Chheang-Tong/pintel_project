@@ -113,11 +113,7 @@ class _AuthScreenState extends State<AuthScreen>
             onCollapsed: onCollapsed,
             onTap: (int index) {
               setState(() => selectedIndex = index);
-              controller.animateTo(
-                0,
-                duration: const Duration(milliseconds: 3),
-                curve: Curves.fastOutSlowIn,
-              ); //to make the scroll to top
+             
             },
             selectedIndex: selectedIndex,
             url:
