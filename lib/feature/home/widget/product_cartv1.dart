@@ -3,22 +3,33 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../core/core.dart';
 
-class ProductCartV1 extends StatelessWidget {
+
+class ProductCartV1 extends StatefulWidget {
   const ProductCartV1({
     super.key,
+    required this.name,
+    required this.image,
+    required this.percendiscount,
+    required this.pricediscount,
   });
+  final String name, image;
+  final double percendiscount, pricediscount;
 
+  @override
+  State<ProductCartV1> createState() => _ProductCartV1State();
+}
+
+class _ProductCartV1State extends State<ProductCartV1> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Container(
       margin: EdgeInsets.all(4),
       width: size.width,
       height: size.height,
       decoration: BoxDecoration(
         color: ColorResources.white45,
-        borderRadius: BorderRadius.circular(Dimensions.smallRadius),
+        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
       ),
       child: Column(
         children: [
@@ -28,44 +39,48 @@ class ProductCartV1 extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               image: DecorationImage(
-                image: AssetImage('assets/image/image.png'),
+                image: NetworkImage(widget.image),
+                fit: BoxFit.cover,
               ),
             ),
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                Positioned(
-                  top: -6,
-                  left: -6,
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 39,
-                    height: 18,
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.smallRadius),
-                      color: ColorResources.primaryColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '15%',
-                        style: regularDefault.copyWith(
-                          color: ColorResources.whiteColor,
+                if (widget.percendiscount != 0.0 || widget.pricediscount != 0.0)
+                  Positioned(
+                    top: -6,
+                    left: -6,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 39,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.defaultRadius),
+                        color: ColorResources.primaryColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          widget.pricediscount != 0.0
+                              ? '${widget.pricediscount} \$'
+                              : '${widget.percendiscount.toInt()}%',
+                          style: regularDefault.copyWith(
+                            color: ColorResources.whiteColor,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
                 Positioned(
                   top: 4,
                   right: 4,
                   child: Container(
                     height: 24,
                     width: 24,
-                    padding: EdgeInsets.all(Dimensions.extrasmallRadius),
+                    padding: EdgeInsets.all(Dimensions.smallRadius),
                     decoration: BoxDecoration(
                       borderRadius:
-                          BorderRadius.circular(Dimensions.smallRadius),
+                          BorderRadius.circular(Dimensions.defaultRadius),
                       color: ColorResources.whiteColor.withOpacity(0.25),
                     ),
                     child: Center(
@@ -86,7 +101,7 @@ class ProductCartV1 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Waisted Jeans',
+                  widget.name,
                   style: semiBoldLarge,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -165,7 +180,7 @@ class ProductCartV1 extends StatelessWidget {
                     bottom: Dimensions.mediumMagin,
                     right: Dimensions.mediumMagin,
                   ),
-                  padding: EdgeInsets.all(Dimensions.extrasmallPadding),
+                  padding: EdgeInsets.all(Dimensions.smallPadding),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),

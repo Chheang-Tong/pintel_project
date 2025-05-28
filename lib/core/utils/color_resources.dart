@@ -26,6 +26,12 @@ class ColorResources {
   static Color white10 = whiteColor.withOpacity(0.10);
   static Color white5 = whiteColor.withOpacity(0.05);
 
+  static Color success75 = successColor.withOpacity(0.75);
+  static Color success45 = successColor.withOpacity(0.45);
+  static Color success25 = successColor.withOpacity(0.25);
+  static Color success10 = successColor.withOpacity(0.10);
+  static Color success5 = successColor.withOpacity(0.05);
+
   static Color primary75 = primaryColor.withOpacity(0.75);
   static Color primary45 = primaryColor.withOpacity(0.45);
   static Color primary25 = primaryColor.withOpacity(0.25);

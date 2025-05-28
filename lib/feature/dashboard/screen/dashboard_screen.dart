@@ -38,13 +38,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: Dimensions.vertical4),
-                      child:
-                          Text("Choose our store to order quickly and easily"),
+                        vertical: Dimensions.vertical4,
+                      ),
+                      child: Text(
+                        "Choose our store to order quickly and easily",
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: Dimensions.vertical8),
+                        vertical: Dimensions.vertical8,
+                      ),
                       child: CustomTextField(
                         hintText: 'Search for Store',
                         inputAction: TextInputAction.done,
@@ -67,7 +70,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               vertical: 14,
                               horizontal: 23,
                             ),
-                            margin: EdgeInsets.all(Dimensions.extrasmallMagin),
+                            margin: EdgeInsets.all(Dimensions.smallMagin),
                             decoration: BoxDecoration(
                               color: controller.select == -1
                                   ? ColorResources.primaryColor
@@ -134,113 +137,103 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.75,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 12,
+                          childAspectRatio: 0.85,
                         ),
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: EdgeInsets.all(4),
+                            // margin: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(Dimensions.space12),
                             decoration: BoxDecoration(
                               color: ColorResources.whiteColor,
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 60,
-                                        width: 60,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          border: Border.all(
-                                            color: ColorResources.black45,
-                                          ),
-                                          color: Colors.amber,
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                              'assets/image/fashion.png',
-                                            ),
-                                            fit: BoxFit.cover,
-                                          ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 60,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: ColorResources.black45,
                                         ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          controller.selectBool();
-                                        },
-                                        child: controller.isSelect
-                                            ? Icon(
-                                                Icons.bookmark,
-                                                size: 24,
-                                                color:
-                                                    ColorResources.primaryColor,
-                                              )
-                                            : Icon(
-                                                Icons.bookmark_outline,
-                                                size: 24,
-                                              ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text(
-                                    'Tos Tenh',
-                                    style: semiBoldExtraLarge,
-                                  ),
-                                  Text(
-                                    'Fashion',
-                                    style: regularDefault,
-                                  ),
-                                  Text(
-                                    'Tourl Kork. Phnom Penh',
-                                    style: regularDefault,
-                                  ),
-                                  Spacer(),
-                                  SizedBox(
-                                    height: size.height * .05,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                        color: Colors.amber,
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            'assets/image/fashion.png',
+                                          ),
+                                          fit: BoxFit.cover,
                                         ),
-                                        backgroundColor:
-                                            ColorResources.primaryColor,
-                                      ),
-                                      onPressed: () {
-                                        Get.toNamed(
-                                          RouteHelper.nologNavbar,
-                                        );
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'View Store',
-                                            style: regularDefault.copyWith(
-                                              color: ColorResources.whiteColor,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_outlined,
-                                            color: ColorResources.whiteColor,
-                                          ),
-                                        ],
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        controller.selectBool();
+                                      },
+                                      child: controller.isSelect
+                                          ? Icon(
+                                              Icons.bookmark,
+                                              size: 24,
+                                              color:
+                                                  ColorResources.primaryColor,
+                                            )
+                                          : Icon(
+                                              Icons.bookmark_outline,
+                                              size: 24,
+                                            ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Tos Tenh',
+                                  style: semiBoldExtraLarge,
+                                ),
+                                Text(
+                                  'Fashion',
+                                  style: regularDefault,
+                                ),
+                                Text(
+                                  'Posenchey. Phnom Penh',
+                                  style: regularDefault,
+                                ),
+                                Spacer(),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(
+                                      RouteHelper.nologNavbar,
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 24,
+                                    width: size.width,
+                                    decoration: BoxDecoration(
+                                      color: ColorResources.black5,
+                                      borderRadius: BorderRadius.circular(
+                                        Dimensions.extrasmallRadius,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'View Store',
+                                        textAlign: TextAlign.center,
+                                        style: mediumLarge.copyWith(
+                                          color: ColorResources.blackColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           );
                         },

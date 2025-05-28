@@ -7,23 +7,24 @@ class RouteHelper {
   static const String splashScreen = "/splash_screen";
   static const String onboardScreen = '/onboard_screen';
   static const String authScreen = "/auth_screen";
-  static const String forgotPasswordScreen = "/forgot_password_screen";
-
+  static const String dashboardScreen = "/dashboard_screen";
   static const String loginNavbar = '/login_navbar';
   static const String nologNavbar = '/no_login_navbar';
   static const String filterScreen = '/filter_screen';
+  static const String cartScreen = "/cart_screen";
+  static const String checkoutScreen = "/checkout_screen";
+  static const String paymentScreen = "/payment_method";
+  static const String paybyABA = "/pay_by_aba";
 
-  static const String dashboardScreen = "/dashboard_screen";
   static const String customerScreen = "/customer_screen";
+  static const String forgotPasswordScreen = "/forgot_password_screen";
   static const String customerDetailsScreen = "/customer_details_screen";
   static const String addCustomerScreen = "/add_customer_screen";
   static const String updateCustomerScreen = "/update_customer_screen";
   static const String addContactScreen = "/add_contact_screen";
-  static const String cartScreen = "/cart_screen";
   static const String projectDetailsScreen = "/project_details_screen";
   static const String addProjectScreen = "/add_project_screen";
   static const String updateProjectScreen = "/update_project_screen";
-  static const String taskScreen = "/task_screen";
   static const String taskDetailsScreen = "/task_details_screen";
   static const String addTaskScreen = "/add_task_screen";
   static const String updateTaskScreen = "/update_task_screen";
@@ -51,8 +52,6 @@ class RouteHelper {
   static const String proposalDetailsScreen = "/proposal_details_screen";
   static const String addProposalScreen = "/add_proposal_screen";
   static const String updateProposalScreen = "/update_proposal_screen";
-  static const String paymentScreen = "/payment_screen";
-  static const String paymentDetailsScreen = "/payment_details_screen";
   static const String itemScreen = "/item_screen";
   static const String itemDetailsScreen = "/item_details_screen";
   static const String settingsScreen = "/settings_screen";
@@ -67,9 +66,11 @@ class RouteHelper {
       curve: Curves.fastEaseInToSlowEaseOut,
     ),
     //   GetPage(name: onboardScreen, page: () => const OnBoardIntroScreen()),
-      GetPage(name: authScreen, page: () => const AuthScreen()),
-    //   GetPage(
-    //       name: forgotPasswordScreen, page: () => const ForgetPasswordScreen()),
+
+    GetPage(
+      name: authScreen,
+      page: () => const AuthScreen(),
+    ),
     GetPage(
       name: dashboardScreen,
       page: () => const DashboardScreen(),
@@ -83,7 +84,23 @@ class RouteHelper {
       page: () => FilterScreen(),
       transition: Transition.rightToLeft,
     ),
-      GetPage(name: cartScreen, page: () => const CartScreen()),
+    GetPage(
+      name: cartScreen,
+      page: () => const CartScreen(),
+      transition: Transition.rightToLeft,
+      curve: Curves.fastOutSlowIn,
+    ),
+    GetPage(
+      name: checkoutScreen,
+      page: () => const CheckoutScreen(),
+      transition: Transition.rightToLeft,
+      curve: Curves.fastOutSlowIn,
+    ),
+    GetPage(name: paymentScreen, page: () => const PaymentMethod()),
+    GetPage(name: paybyABA, page: () => PayByABA()),
+
+    //   GetPage(
+    //       name: forgotPasswordScreen, page: () => const ForgetPasswordScreen()),
     //   GetPage(name: customerScreen, page: () => const CustomersScreen()),
     //   GetPage(
     //       name: customerDetailsScreen,
@@ -102,7 +119,6 @@ class RouteHelper {
     //   GetPage(
     //       name: updateProjectScreen,
     //       page: () => UpdateProjectScreen(id: Get.arguments)),
-    //   GetPage(name: taskScreen, page: () => const TaskScreen()),
     //   GetPage(
     //       name: taskDetailsScreen,
     //       page: () => TaskDetailsScreen(id: Get.arguments)),
@@ -158,10 +174,6 @@ class RouteHelper {
     //   GetPage(
     //       name: updateProposalScreen,
     //       page: () => UpdateProposalScreen(id: Get.arguments)),
-    //   GetPage(name: paymentScreen, page: () => const PaymentScreen()),
-    //   GetPage(
-    //       name: paymentDetailsScreen,
-    //       page: () => PaymentDetailsScreen(id: Get.arguments)),
     //   GetPage(name: itemScreen, page: () => const ItemScreen()),
     //   GetPage(
     //       name: itemDetailsScreen,

@@ -63,7 +63,10 @@ shareDialog({required String link}) {
               )
             ],
           ),
-          Divider(),
+          Divider(
+            color: ColorResources.black5,
+            thickness: 1,
+          ),
         ],
       ),
       titleTextStyle: boldOverLarge.copyWith(

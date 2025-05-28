@@ -40,7 +40,7 @@ class MapWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: ColorResources.black45,
                       borderRadius:
-                          BorderRadius.circular(Dimensions.smallRadius),
+                          BorderRadius.circular(Dimensions.defaultRadius),
                     ),
                   ),
                   GestureDetector(
@@ -53,7 +53,7 @@ class MapWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: ColorResources.black5,
                         borderRadius:
-                            BorderRadius.circular(Dimensions.smallRadius),
+                            BorderRadius.circular(Dimensions.defaultRadius),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

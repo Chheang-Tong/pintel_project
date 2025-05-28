@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   ];
   Map<String, String> cate = {
     'Shirt': 'assets/image/shirt.svg',
-     'Pant':'assets/image/pant.svg',
+    'Pant':'assets/image/pant.svg',
     'Dress':'assets/image/dress.svg',
     'Necklance':'assets/image/necklace.svg',
     'Shoe':'assets/image/shoe.svg',

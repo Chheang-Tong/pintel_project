@@ -30,6 +30,7 @@ class CustomTextField extends StatefulWidget {
   final Color? fillColor;
   final bool isRequired;
   final double borderRadius;
+  final bool noneBorder;
 
   const CustomTextField({
     super.key,
@@ -58,6 +59,7 @@ class CustomTextField extends StatefulWidget {
     this.animatedLabel = true,
     this.isRequired = false,
     this.borderRadius = Dimensions.defaultRadius,
+    this.noneBorder = false,
   });
 
   @override
@@ -102,28 +104,34 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   fillColor: widget.fillColor ?? ColorResources.whiteColor,
                   filled: true,
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: ColorResources.black10,
-                    ),
+                    borderSide: widget.noneBorder
+                        ? BorderSide.none
+                        : BorderSide(
+                            width: 1,
+                            color: ColorResources.black10,
+                          ),
                     borderRadius: BorderRadius.circular(
                       widget.borderRadius,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 0.5,
-                      color: ColorResources.black10,
-                    ),
+                    borderSide: widget.noneBorder
+                        ? BorderSide.none
+                        : BorderSide(
+                            width: 0.5,
+                            color: ColorResources.black10,
+                          ),
                     borderRadius: BorderRadius.circular(
                       widget.borderRadius,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: ColorResources.black10,
-                    ),
+                    borderSide: widget.noneBorder
+                        ? BorderSide.none
+                        : BorderSide(
+                            width: 1,
+                            color: ColorResources.black10,
+                          ),
                     borderRadius: BorderRadius.circular(
                       widget.borderRadius,
                     ),
@@ -205,28 +213,34 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       fillColor: widget.fillColor,
                       filled: true,
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: ColorResources.getblack45(),
-                        ),
+                        borderSide: widget.noneBorder
+                            ? BorderSide.none
+                            : BorderSide(
+                                width: 1,
+                                color: ColorResources.getblack45(),
+                              ),
                         borderRadius: BorderRadius.circular(
                           widget.borderRadius,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: ColorResources.getblack45(),
-                        ),
+                        borderSide: widget.noneBorder
+                            ? BorderSide.none
+                            : BorderSide(
+                                width: 1,
+                                color: ColorResources.getblack45(),
+                              ),
                         borderRadius: BorderRadius.circular(
                           widget.borderRadius,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: ColorResources.getblack45(),
-                        ),
+                        borderSide: widget.noneBorder
+                            ? BorderSide.none
+                            : BorderSide(
+                                width: 1,
+                                color: ColorResources.getblack45(),
+                              ),
                         borderRadius: BorderRadius.circular(
                           widget.borderRadius,
                         ),
@@ -302,10 +316,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
               fillColor: ColorResources.transparentColor,
               filled: true,
               border: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  width: 1,
-                  color: ColorResources.getblack45(),
-                ),
+                borderSide: widget.noneBorder
+                    ? BorderSide.none
+                    : BorderSide(
+                        width: 1,
+                        color: ColorResources.getblack45(),
+                      ),
               ),
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(

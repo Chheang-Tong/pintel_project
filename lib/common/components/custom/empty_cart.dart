@@ -41,7 +41,7 @@ class EmptyCart extends StatelessWidget {
               horizontal: Dimensions.space60,
             ),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => onPressed(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: ColorResources.primaryColor,
                 minimumSize: Size(size.width, Dimensions.defaultButtonH),
