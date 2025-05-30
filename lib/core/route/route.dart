@@ -15,6 +15,7 @@ class RouteHelper {
   static const String checkoutScreen = "/checkout_screen";
   static const String paymentScreen = "/payment_method";
   static const String paybyABA = "/pay_by_aba";
+  static const String productDetails = "/product_detail";
 
   static const String customerScreen = "/customer_screen";
   static const String forgotPasswordScreen = "/forgot_password_screen";
@@ -49,7 +50,6 @@ class RouteHelper {
   static const String addEstimateScreen = "/add_estimate_screen";
   static const String updateEstimateScreen = "/update_estimate_screen";
   static const String proposalScreen = "/proposal_screen";
-  static const String proposalDetailsScreen = "/proposal_details_screen";
   static const String addProposalScreen = "/add_proposal_screen";
   static const String updateProposalScreen = "/update_proposal_screen";
   static const String itemScreen = "/item_screen";
@@ -98,6 +98,10 @@ class RouteHelper {
     ),
     GetPage(name: paymentScreen, page: () => const PaymentMethod()),
     GetPage(name: paybyABA, page: () => PayByABA()),
+    GetPage(
+      name: productDetails,
+      page: () => ProductDetail(),
+    ),
 
     //   GetPage(
     //       name: forgotPasswordScreen, page: () => const ForgetPasswordScreen()),
@@ -167,9 +171,6 @@ class RouteHelper {
     //       name: updateEstimateScreen,
     //       page: () => UpdateEstimateScreen(id: Get.arguments)),
     //   GetPage(name: proposalScreen, page: () => const ProposalScreen()),
-    //   GetPage(
-    //       name: proposalDetailsScreen,
-    //       page: () => ProposalDetailsScreen(id: Get.arguments)),
     //   GetPage(name: addProposalScreen, page: () => const AddProposalScreen()),
     //   GetPage(
     //       name: updateProposalScreen,

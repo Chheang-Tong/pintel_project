@@ -273,7 +273,19 @@ class _ScreenState extends State<Screen> {
                         percendiscount: product.percendiscount,
                         pricediscount: product.pricediscount,
                         onTap: () {
-                          cartController.addToCart(product);
+                          Get.toNamed(
+                            RouteHelper.productDetails,
+                            arguments: {
+                              'id': product.id,
+                              'name': product.title,
+                              'image': product.image,
+                              'price': product.price,
+                              'percentdis': product.percendiscount,
+                              'pricedis': product.pricediscount,
+                              'discription': product.description,
+                              'stock': product.stock,
+                            },
+                          );
                         },
                       );
                     },

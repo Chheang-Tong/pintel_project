@@ -8,6 +8,8 @@ class CartController extends GetxController {
   ApiClient apiClient;
   CartController({required this.apiClient});
   var cartItems = <CartModel>[].obs;
+  var product = <Product>[].obs;
+  // var favoriteProducts = <FavoriteModel>[].obs;
 
   @override
   void onInit() {
@@ -77,6 +79,53 @@ class CartController extends GetxController {
     update();
   }
 
+  void addToCarts(String productId, int quantity) {
+    Product? product;
+
+    try {
+      product = productList.firstWhere((p) => p.id == productId);
+    } catch (e) {
+      Get.snackbar("Error", "Product not found");
+      return;
+    }
+
+    if (product.stock >= quantity) {
+      int index = cartItems.indexWhere((item) => item.product.id == productId);
+      if (index != -1) {
+        cartItems[index].quantity += quantity;
+      } else {
+        cartItems.add(CartModel(product: product, quantity: quantity));
+      }
+      product.decreaseStock(quantity);
+    } else {
+      Get.snackbar("Out of Stock",
+          "Only ${product.stock} of ${product.title} is available");
+    }
+
+    saveCart();
+    update();
+  }
+
+  void addFavorite(String productId) {
+    Product? product;
+
+    try {
+      product = productList.firstWhere((p) => p.id == productId);
+    } catch (e) {
+      Get.snackbar("Error", "Product not found");
+      return;
+    }
+
+    if (!product.isFavorite.value) {
+      product.isFavorite.value = true;
+      saveFav();
+    } else {
+      Get.snackbar(
+          "Already Favorite", "${product.title} is already in favorites");
+    }
+    update();
+  }
+
   /// Remove product from cart and restore stock
   void removeFromCart(Product product) {
     int index = cartItems.indexWhere((item) => item.product.id == product.id);
@@ -126,9 +175,25 @@ class CartController extends GetxController {
   int get totalItems => cartItems.fold(0, (sum, item) => sum + item.quantity);
   int get totalProductTypes => cartItems.length;
 
-
   double get totalAmount => cartItems.fold(
-      0, (sum, item) => sum + (item.product.price * item.quantity));
+        0,
+        (sum, item) => sum + (item.product.price * item.quantity),
+      );
+
+  double get discountPrice => cartItems.fold(
+        0,
+        (sum, item) => sum + (item.product.pricediscount * item.quantity),
+      );
+  double get discountPercent => cartItems.fold(
+        0,
+        (sum, item) =>
+            sum +
+            ((item.product.price * item.product.percendiscount) / 100) *
+                item.quantity,
+      );
+  double get totalDiscount => discountPercent + discountPrice;
+  double get grandTotal =>
+      totalAmount - totalDiscount;
 
   void updateProductQty(Product product, int newQty) {
     int index = cartItems.indexWhere((p) => p.product.id == product.id);
@@ -148,6 +213,7 @@ class CartController extends GetxController {
   List<Product> get favoriteProducts {
     return productList.where((product) => product.isFavorite.value).toList();
   }
+
   void clearCart() {
     for (var item in cartItems) {
       item.product.increaseStock(item.quantity);
@@ -156,5 +222,4 @@ class CartController extends GetxController {
     saveCart();
     update();
   }
-
 }

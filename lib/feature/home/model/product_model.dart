@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class Product {
   final String image, title, description;
-  final int id;
+  final String id;
   int stock;
   final double price, pricediscount, percendiscount;
   var isFavorite = false.obs;
@@ -65,19 +65,19 @@ class Product {
 
 RxList<Product> productList = <Product>[
   Product(
-    id: 1,
+    id: '1',
     title: "Men Fashion",
     price: 15,
     pricediscount: 0,
     percendiscount: 15,
     stock: 12,
     description:
-        "A handbag is a fashion accessory designed for carrying personal items such as wallets, keys, cosmetics, phones, and other essentials. It is commonly used by women and comes in various stocks, shapes, materials, and styles to suit different occasions and preferences.",
+        "Embody timeless flair with the Slim Ash Men's Jeans in Mid Blue. These  broken-twill stretch denim jeans feature a medium wash with artful  fading and whiskering, creating a classic yet contemporary look.",
     image:
         "https://i.pinimg.com/736x/50/ae/df/50aedf1095fc533fc1a98bf31de6e9fc.jpg",
   ),
   Product(
-    id: 2,
+    id: '2',
     title: "title1",
     price: 15,
     pricediscount: 1,
@@ -89,7 +89,7 @@ RxList<Product> productList = <Product>[
         "https://i.pinimg.com/736x/59/e2/74/59e2743a12e862a137fcf223e75f0a6f.jpg",
   ),
   Product(
-    id: 3,
+    id: '3',
     title: "title2",
     price: 15,
     pricediscount: 0,
@@ -101,7 +101,7 @@ RxList<Product> productList = <Product>[
         "https://i.pinimg.com/736x/3b/fd/7e/3bfd7e39f683fac353e3266eb25a9062.jpg",
   ),
   Product(
-    id: 4,
+    id: '4',
     title: "title3",
     price: 15,
     pricediscount: 0,
@@ -113,7 +113,7 @@ RxList<Product> productList = <Product>[
         "https://i.pinimg.com/736x/e9/97/79/e99779130a4beb929310db1e84d1069c.jpg",
   ),
   Product(
-    id: 5,
+    id: '5',
     title: "title4",
     price: 15,
     pricediscount: 0,
@@ -125,7 +125,7 @@ RxList<Product> productList = <Product>[
         "https://i.pinimg.com/736x/7d/c3/be/7dc3be52504b8137e8e3ca53af119d11.jpg",
   ),
   Product(
-    id: 6,
+    id: '6',
     title: "title5",
     price: 15,
     pricediscount: 0,
@@ -137,7 +137,7 @@ RxList<Product> productList = <Product>[
         "https://i.pinimg.com/736x/5b/b8/e9/5bb8e934633796263c0406b0ee395f6f.jpg",
   ),
   Product(
-    id: 7,
+    id: '7',
     title: "title6",
     price: 15,
     pricediscount: 0,

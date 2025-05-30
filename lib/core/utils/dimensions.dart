@@ -7,10 +7,10 @@ class Dimensions {
   static const double fontSmall = 11.00;
   static const double fontDefault = 12.00;
   static const double fontLarge = 14.00;
-  static const double   fontMediumLarge = 16.00;
+  static const double fontMediumLarge = 16.00;
   static const double fontExtraLarge = 19.00;
   static const double fontOverLarge = 20.00;
-  static const double fontMegaLarge = 28.00;
+  static const double fontMegaLarge = 24.00;
 
   static const double defaultButtonH = 45;
   static const double vertical4 = 4;
@@ -21,6 +21,7 @@ class Dimensions {
   static const double space1 = 1;
   static const double space2 = 2;
   static const double space3 = 3;
+  static const double space4 = 4;
   static const double space5 = 5;
   static const double space7 = 7;
   static const double space8 = 8;
@@ -60,7 +61,7 @@ class Dimensions {
     horizontal: space16,
     vertical: space8,
   );
-   static const EdgeInsets bodyMagin = EdgeInsets.symmetric(
+  static const EdgeInsets bodyMagin = EdgeInsets.symmetric(
     horizontal: space16,
   );
 

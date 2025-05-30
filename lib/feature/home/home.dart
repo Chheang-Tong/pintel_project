@@ -10,3 +10,4 @@ export 'screen/home_screen.dart';
 export 'widget/product_cartv1.dart';
 export 'widget/product_cartv2.dart';
 export 'widget/screen.dart';
+export 'widget/product_detail.dart';

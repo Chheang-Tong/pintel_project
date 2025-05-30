@@ -249,3 +249,8 @@ const TextStyle boldOverLarge = TextStyle(
   fontWeight: FontWeight.w700,
   fontSize: Dimensions.fontOverLarge,
 );
+const TextStyle boldMegaLarge = TextStyle(
+  fontFamily: 'Roboto',
+  fontWeight: FontWeight.w700,
+  fontSize: Dimensions.fontMegaLarge,
+);

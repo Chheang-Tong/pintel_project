@@ -8,3 +8,4 @@ export 'nav_bar/nav_bar.dart';
 export 'dashboard/dashboard.dart';
 export 'filter/filter.dart';
 export 'check_out/check_out.dart';
+export 'location/location.dart';

@@ -182,9 +182,14 @@ class _CartScreenState extends State<CartScreen> {
                                                 ),
                                               ),
                                             ),
-                                            Text(
-                                              '${cart.quantity}',
-                                              style: semiBoldMediumLarge,
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 4),
+                                              child: Text(
+                                                '${cart.quantity}',
+                                                style: semiBoldMediumLarge,
+                                              ),
                                             ),
                                             GestureDetector(
                                               onTap: () => cartController
@@ -278,7 +283,7 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                               ),
                               Text(
-                                '\$ ${cartController.totalAmount}',
+                                '\$ ${cartController.totalDiscount}',
                                 style: regularMediumLarge.copyWith(
                                   color: ColorResources.black75,
                                 ),
@@ -293,7 +298,7 @@ class _CartScreenState extends State<CartScreen> {
                                 style: semiBoldMediumLarge,
                               ),
                               Text(
-                                '\$ ${cartController.totalAmount}',
+                                '\$ ${cartController.grandTotal}',
                                 style: semiBoldMediumLarge,
                               ),
                             ],
