@@ -154,7 +154,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                                 color: ColorResources.black45,
                                 size: 20,
                               ),
-                              onPressed: _toggle)
+                              onPressed: _toggle,)
                           : widget.isIcon
                               ? IconButton(
                                   onPressed: widget.onSuffixTap,
