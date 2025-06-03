@@ -9,3 +9,5 @@ export 'dashboard/dashboard.dart';
 export 'filter/filter.dart';
 export 'check_out/check_out.dart';
 export 'location/location.dart';
+export 'order/order.dart';
+export 'wish/wish.dart';

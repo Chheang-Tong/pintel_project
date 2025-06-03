@@ -69,88 +69,91 @@ class _ScreenState extends State<Screen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 8,
-                  ),
-                  height: size.height * 0.172,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: ColorResources.black45,
-                  ),
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: PageView.builder(
-                          controller: controller.pageController,
-                          itemCount: controller.banner.length,
-                          onPageChanged: (index) =>
-                              controller.onPageChanged(index),
-                          physics: PageScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return Image.asset(
-                              controller.banner[index],
-                              fit: BoxFit.cover,
-                              width: size.width,
-                            );
-                          },
-                        ),
-                      ),
-                      Positioned(
-                        top: 15,
-                        bottom: 15,
-                        left: 0,
-                        child: Container(
-                          height: size.height * 0.1,
-                          width: size.width * 0.07,
-                          decoration: BoxDecoration(
-                            color: ColorResources.white25,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(8),
-                              bottomRight: Radius.circular(8),
-                            ),
-                          ),
-                          child: Obx(
-                            () => Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ...List.generate(
-                                  controller.banner.length,
-                                  (index) {
-                                    return Container(
-                                      height: 12,
-                                      width: 4,
-                                      margin: EdgeInsets.all(3),
-                                      padding: EdgeInsets.all(1),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: controller.currentIndex.value ==
-                                              index
-                                          ? Container(
-                                              height: size.height,
-                                              width: size.width,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorResources.primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                            )
-                                          : null,
-                                    );
-                                  },
-                                )
-                              ],
-                            ),
+                Obx(
+                  () => Container(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 8,
+                    ),
+                    height: size.height * 0.172,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: ColorResources.black45,
+                    ),
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: PageView.builder(
+                            controller: controller.pageController,
+                            itemCount: controller.banner.length,
+                            onPageChanged: (index) =>
+                                controller.onPageChanged(index),
+                            physics: PageScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return Image.asset(
+                                controller.banner[index],
+                                fit: BoxFit.cover,
+                                width: size.width,
+                              );
+                            },
                           ),
                         ),
-                      )
-                    ],
+                        Positioned(
+                          top: 15,
+                          bottom: 15,
+                          left: 0,
+                          child: Container(
+                            height: size.height * 0.1,
+                            width: size.width * 0.07,
+                            decoration: BoxDecoration(
+                              color: ColorResources.white25,
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                              ),
+                            ),
+                            child: Obx(
+                              () => Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ...List.generate(
+                                    controller.banner.length,
+                                    (index) {
+                                      return Container(
+                                        height: 12,
+                                        width: 4,
+                                        margin: EdgeInsets.all(3),
+                                        padding: EdgeInsets.all(1),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: controller.currentIndex.value ==
+                                                index
+                                            ? Container(
+                                                height: size.height,
+                                                width: size.width,
+                                                decoration: BoxDecoration(
+                                                  color: ColorResources
+                                                      .primaryColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                ),
+                                              )
+                                            : null,
+                                      );
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Row(
@@ -257,39 +260,8 @@ class _ScreenState extends State<Screen> {
                   ),
                 ),
                 SizedBox(
-                  height: size.height * 1.58,
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.80,
-                    ),
-                    itemCount: productList.length,
-                    itemBuilder: (context, index) {
-                      final product = productList[index];
-                      return ProductCartV2(
-                        name: product.title,
-                        image: product.image,
-                        percendiscount: product.percendiscount,
-                        pricediscount: product.pricediscount,
-                        onTap: () {
-                          Get.toNamed(
-                            RouteHelper.productDetails,
-                            arguments: {
-                              'id': product.id,
-                              'name': product.title,
-                              'image': product.image,
-                              'price': product.price,
-                              'percentdis': product.percendiscount,
-                              'pricedis': product.pricediscount,
-                              'discription': product.description,
-                              'stock': product.stock,
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
+                  height: size.height,
+                  child: HomeBody(),
                 )
               ],
             ),
@@ -297,5 +269,50 @@ class _ScreenState extends State<Screen> {
         ),
       );
     });
+  }
+}
+
+class HomeBody extends StatelessWidget {
+  const HomeBody({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true, // This allows GridView to expand based on item count
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.80,
+        // crossAxisSpacing: 8,
+        // mainAxisSpacing: 8,
+      ),
+      itemCount: productList.length,
+      itemBuilder: (context, index) {
+        final product = productList[index];
+        return ProductCartV2(
+          name: product.title,
+          image: product.image,
+          percendiscount: product.percendiscount,
+          pricediscount: product.pricediscount,
+          onTap: () {
+            Get.toNamed(
+              RouteHelper.productDetails,
+              arguments: {
+                'id': product.id,
+                'name': product.title,
+                'image': product.image,
+                'price': product.price,
+                'percentdis': product.percendiscount,
+                'pricedis': product.pricediscount,
+                'discription': product.description,
+                'stock': product.stock,
+              },
+            );
+          },
+        );
+      },
+    );
   }
 }

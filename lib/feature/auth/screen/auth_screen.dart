@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pintel_project/common/common.dart';
-import 'package:pintel_project/core/core.dart';
+import '/common/common.dart';
+import '/core/core.dart';
+
+import '../../feature.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -9,302 +11,433 @@ class AuthScreen extends StatefulWidget {
   State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-    _tabController.addListener(() {
-      if (_tabController.indexIsChanging == false) {
-        setState(() {
-          currentIndex = _tabController.index;
-        });
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  int currentIndex = 0;
+class _AuthScreenState extends State<AuthScreen> {
+  final AuthController authController = Get.put(AuthController());
+  bool isLoggedIn = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: size.width,
-              height: size.height * 0.4,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF200309),
-                    Color(0xFF8F3749),
-                  ],
-                ),
+    return GetBuilder<AuthController>(builder: (controller) {
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              AuthView(
+                storeName: 'Tos Tenh',
+                aboutStore:
+                    "Whether you're back for more or just getting started, log in or create an account to explore tasty deals and fresh finds!",
+                title: isLoggedIn ? 'Log In' : 'Register',
+                imageUrl:
+                    'https://i.pinimg.com/736x/25/c4/e7/25c4e727090b7d6d89327808d41f4d70.jpg',
               ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: -37,
-                    left: -107,
-                    child: Container(
-                      width: size.width * 0.95,
-                      height: size.width * 0.95,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorResources.white10,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: -152,
-                    left: -222,
-                    child: Container(
-                      width: size.width * 1.5,
-                      height: size.width * 1.5,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorResources.white5,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 65,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
+              isLoggedIn
+                  ? DefaultTabController(
+                      length: controller.tab.length,
+                      animationDuration: Duration(milliseconds: 300),
+                      child: Container(
+                        width: size.width,
+                        height: size.height * 0.6,
                         color: ColorResources.whiteColor,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    top: 116,
-                    right: 20,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 83,
-                          width: 83,
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: ColorResources.white45,
-                              width: 5,
-                            ),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: AssetImage('assets/image/fashion.png'),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Tos Tenh',
-                                style: boldOverLarge.copyWith(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              child: TabBar(
+                                controller: controller.tabController,
+                                tabs: [
+                                  ...controller.tab.map((tab) {
+                                    return Tab(
+                                      text: tab,
+                                    );
+                                  }),
+                                ],
+                                isScrollable: true,
+                                tabAlignment: TabAlignment.start,
+                                labelColor: ColorResources.blackColor,
+                                automaticIndicatorColorAdjustment: true,
+                                dividerHeight: 0,
+                                padding: EdgeInsets.zero,
+                                labelPadding: EdgeInsets.only(left: 16),
+                                indicatorPadding:
+                                    EdgeInsets.symmetric(vertical: 6),
+                                splashFactory: NoSplash.splashFactory,
+                                indicatorSize: TabBarIndicatorSize.label,
+                                indicatorAnimation:
+                                    TabIndicatorAnimation.linear,
+                                indicator: BoxDecoration(
                                   color: ColorResources.whiteColor,
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: ColorResources.blackColor,
+                                      width: 2.0,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              Text(
-                                "Whether you're back for more or just getting started, log in or create an account to explore tasty deals and fresh finds!",
-                                style: regularDefault.copyWith(
-                                  color: ColorResources.whiteColor,
+                            ),
+                            Obx(
+                              () => Expanded(
+                                flex: 5,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Column(
+                                    children: [
+                                      if (controller.currentIndex.value ==
+                                          0) ...[
+                                        SizedBox(height: Dimensions.space8),
+                                        CustomTextField(
+                                          controller:
+                                              controller.phoneNumberController,
+                                          onChanged: (onChanged) {},
+                                          hintText: 'Phone Number',
+                                          inputAction: TextInputAction.done,
+                                          textInputType: TextInputType.phone,
+                                          noneBorder: true,
+                                          fillColor: ColorResources.black5,
+                                        ),
+                                      ],
+                                      if (controller.currentIndex.value ==
+                                          1) ...[
+                                        SizedBox(height: Dimensions.space8),
+                                        CustomTextField(
+                                          controller:
+                                              controller.emailController,
+                                          focusNode: controller.emailFocusNode,
+                                          nextFocus:
+                                              controller.passwordFocusNode,
+                                          onChanged: (onChanged) {},
+                                          hintText: 'Email',
+                                          inputAction: TextInputAction.next,
+                                          textInputType:
+                                              TextInputType.emailAddress,
+                                          noneBorder: true,
+                                          fillColor: ColorResources.black5,
+                                        ),
+                                        SizedBox(height: Dimensions.space24),
+                                        CustomTextField(
+                                          controller:
+                                              controller.passwordController,
+                                          focusNode:
+                                              controller.passwordFocusNode,
+                                          onChanged: (onChanged) {},
+                                          hintText: 'Password',
+                                          inputAction: TextInputAction.done,
+                                          textInputType:
+                                              TextInputType.visiblePassword,
+                                          noneBorder: true,
+                                          fillColor: ColorResources.black5,
+                                          isPassword: true,
+                                          isShowSuffixIcon: true,
+                                        ),
+                                      ],
+                                      SizedBox(height: Dimensions.space24),
+                                      SizedBox(
+                                        width: size.width,
+                                        height: 45,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                ColorResources.primaryColor,
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: Dimensions.space4,
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Next',
+                                            style: semiBoldMediumLarge.copyWith(
+                                              color: ColorResources.whiteColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                maxLines: 3,
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      height: size.height * 0.1,
-                      decoration: BoxDecoration(
-                        color: ColorResources.whiteColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: Dimensions.largePadding,
-                              // vertical: Dimensions.space23,
-                            ),
-                            child: Text(
-                              'Log In',
-                              style: boldMegaLarge.copyWith(
-                                color: ColorResources.blackColor,
-                                fontSize: 36,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            DefaultTabController(
-              length: 2, // number of tabs
-              animationDuration: Duration(milliseconds: 300),
-              child: Container(
-                width: size.width,
-                height: size.height * 0.7,
-                color: ColorResources.whiteColor,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      // width: size.width * 0.5,
-                      child: TabBar(
-                        controller: _tabController,
-                        tabs: [
-                          Tab(text: 'Phone Number'),
-                          Tab(text: 'Email'),
-                        ],
-                        isScrollable: true,
-                        tabAlignment: TabAlignment.start,
-                        labelColor: ColorResources.blackColor,
-                        automaticIndicatorColorAdjustment: true,
-                        dividerHeight: 0,
-                        padding: EdgeInsets.zero,
-                        labelPadding: EdgeInsets.only(left: 16),
-                        indicatorPadding: EdgeInsets.symmetric(vertical: 6),
-                        splashFactory: NoSplash.splashFactory,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        indicatorAnimation: TabIndicatorAnimation.linear,
-                        indicator: BoxDecoration(
-                          color: ColorResources.whiteColor,
-                          border: Border(
-                            bottom: BorderSide(
-                              color: ColorResources.blackColor,
-                              width: 2.0,
-                            ),
-                          ),
+                            Expanded(
+                              flex: 1,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Didn't have an account?"),
+                                  TextButton(
+                                    onPressed: () {
+                                      // Get.toNamed(RouteHelper.registerScreen);
+                                      setState(() {
+                                        isLoggedIn = false;
+                                      });
+                                    },
+                                    child: Text(
+                                      'Register',
+                                      style: semiBoldMediumLarge.copyWith(
+                                        color: ColorResources.primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: currentIndex == 0 ? 1 : 2,
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          PhoneNumber(),
-                          Email(),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Text('data'),
                     )
-                  ],
-                ),
-              ),
-            )
-          ],
+                  : DefaultTabController(
+                      length: controller.tab.length,
+                      animationDuration: Duration(milliseconds: 300),
+                      child: Container(
+                        width: size.width,
+                        height: size.height * 0.6,
+                        color: ColorResources.whiteColor,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              child: TabBar(
+                                controller: controller.tabController,
+                                tabs: [
+                                  ...controller.tab.map((tab) {
+                                    return Tab(
+                                      text: tab,
+                                    );
+                                  }),
+                                ],
+                                isScrollable: true,
+                                tabAlignment: TabAlignment.start,
+                                labelColor: ColorResources.blackColor,
+                                automaticIndicatorColorAdjustment: true,
+                                dividerHeight: 0,
+                                padding: EdgeInsets.zero,
+                                labelPadding: EdgeInsets.only(left: 16),
+                                indicatorPadding:
+                                    EdgeInsets.symmetric(vertical: 6),
+                                splashFactory: NoSplash.splashFactory,
+                                indicatorSize: TabBarIndicatorSize.label,
+                                indicatorAnimation:
+                                    TabIndicatorAnimation.linear,
+                                indicator: BoxDecoration(
+                                  color: ColorResources.whiteColor,
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: ColorResources.blackColor,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Obx(
+                              () => Expanded(
+                                flex: 5,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Column(
+                                    children: [
+                                      if (controller.currentIndex.value ==
+                                          0) ...[
+                                        SizedBox(height: Dimensions.space8),
+                                        CustomTextField(
+                                          controller:
+                                              controller.phoneNumberController,
+                                          onChanged: (onChanged) {},
+                                          hintText: 'Phone Number',
+                                          inputAction: TextInputAction.done,
+                                          textInputType: TextInputType.phone,
+                                          noneBorder: true,
+                                          fillColor: ColorResources.black5,
+                                        ),
+                                      ],
+                                      if (controller.currentIndex.value ==
+                                          1) ...[
+                                        SizedBox(height: Dimensions.space8),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: CustomTextField(
+                                                controller: controller
+                                                    .firstnameController,
+                                                focusNode: controller
+                                                    .firstnameFocusNode,
+                                                nextFocus: controller
+                                                    .lastnameFocusNode,
+                                                onChanged: (onChanged) {},
+                                                hintText: 'First Name',
+                                                inputAction:
+                                                    TextInputAction.next,
+                                                textInputType:
+                                                    TextInputType.emailAddress,
+                                                noneBorder: true,
+                                                fillColor:
+                                                    ColorResources.black5,
+                                              ),
+                                            ),
+                                            SizedBox(width: Dimensions.space20),
+                                            Expanded(
+                                              child: CustomTextField(
+                                                controller: controller
+                                                    .lastnameController,
+                                                focusNode: controller
+                                                    .lastnameFocusNode,
+                                                nextFocus:
+                                                    controller.emailFocusNode,
+                                                onChanged: (onChanged) {},
+                                                hintText: 'Last Name',
+                                                inputAction:
+                                                    TextInputAction.next,
+                                                textInputType:
+                                                    TextInputType.emailAddress,
+                                                noneBorder: true,
+                                                fillColor:
+                                                    ColorResources.black5,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: Dimensions.space24),
+                                        CustomTextField(
+                                          controller:
+                                              controller.emailController,
+                                          focusNode: controller.emailFocusNode,
+                                          nextFocus:
+                                              controller.phoneNumberFocusNode,
+                                          onChanged: (onChanged) {},
+                                          hintText: 'Email',
+                                          inputAction: TextInputAction.next,
+                                          textInputType:
+                                              TextInputType.emailAddress,
+                                          noneBorder: true,
+                                          fillColor: ColorResources.black5,
+                                        ),
+                                        SizedBox(height: Dimensions.space24),
+                                        CustomTextField(
+                                          controller:
+                                              controller.phoneNumberController,
+                                          focusNode:
+                                              controller.phoneNumberFocusNode,
+                                          nextFocus:
+                                              controller.passwordFocusNode,
+                                          onChanged: (onChanged) {},
+                                          hintText: 'Phone Number',
+                                          inputAction: TextInputAction.next,
+                                          textInputType: TextInputType.phone,
+                                          noneBorder: true,
+                                          fillColor: ColorResources.black5,
+                                        ),
+                                        SizedBox(height: Dimensions.space24),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: CustomTextField(
+                                                controller: controller
+                                                    .passwordController,
+                                                focusNode: controller
+                                                    .passwordFocusNode,
+                                                nextFocus: controller
+                                                    .confirmationFocusNode,
+                                                onChanged: (onChanged) {},
+                                                hintText: 'Password',
+                                                inputAction:
+                                                    TextInputAction.next,
+                                                textInputType: TextInputType
+                                                    .visiblePassword,
+                                                noneBorder: true,
+                                                fillColor:
+                                                    ColorResources.black5,
+                                                isPassword: true,
+                                                isShowSuffixIcon: true,
+                                              ),
+                                            ),
+                                            SizedBox(width: Dimensions.space20),
+                                            Expanded(
+                                              child: CustomTextField(
+                                                controller: controller
+                                                    .confirmationController,
+                                                focusNode: controller
+                                                    .confirmationFocusNode,
+                                                onChanged: (onChanged) {},
+                                                hintText: 'Confirmation',
+                                                inputAction:
+                                                    TextInputAction.done,
+                                                textInputType: TextInputType
+                                                    .visiblePassword,
+                                                noneBorder: true,
+                                                fillColor:
+                                                    ColorResources.black5,
+                                                isPassword: true,
+                                                isShowSuffixIcon: true,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                      SizedBox(height: Dimensions.space20),
+                                      SizedBox(
+                                        width: size.width,
+                                        height: 45,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                ColorResources.primaryColor,
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: Dimensions.space4,
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Get.toNamed(RouteHelper.verifyScreen);
+                                          },
+                                          child: Text(
+                                            'Next',
+                                            style: semiBoldMediumLarge.copyWith(
+                                              color: ColorResources.whiteColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Already have an account?"),
+                                  TextButton(
+                                    onPressed: () {
+                                      // Get.toNamed(RouteHelper.registerScreen);
+                                      setState(() {
+                                        isLoggedIn = true;
+                                      });
+                                    },
+                                    child: Text(
+                                      'LogIn',
+                                      style: semiBoldMediumLarge.copyWith(
+                                        color: ColorResources.primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class PhoneNumber extends StatelessWidget {
-  const PhoneNumber({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorResources.transparentColor,
-      body: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: Dimensions.largeMagin,
-          vertical: Dimensions.defaultMagin,
-        ),
-        child: Column(
-          children: [
-            CustomTextField(
-              onChanged: (onChanged) {},
-              hintText: 'Phone Number',
-              inputAction: TextInputAction.done,
-              textInputType: TextInputType.phone,
-              noneBorder: true,
-              fillColor: ColorResources.black5,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Email extends StatelessWidget {
-  const Email({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorResources.transparentColor,
-      body: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: Dimensions.largeMagin,
-          vertical: Dimensions.defaultMagin,
-        ),
-        child: Column(
-          children: [
-            CustomTextField(
-              onChanged: (onChanged) {},
-              hintText: 'Phone Number',
-              inputAction: TextInputAction.done,
-              textInputType: TextInputType.phone,
-              noneBorder: true,
-              fillColor: ColorResources.black5,
-            ),
-            SizedBox(height: Dimensions.space24),
-            CustomTextField(
-              onChanged: (onChanged) {},
-              hintText: 'Phone Number',
-              inputAction: TextInputAction.done,
-              textInputType: TextInputType.phone,
-              noneBorder: true,
-              fillColor: ColorResources.black5,
-            ),
-          ],
-        ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -1,3 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NologController extends GetxController{}
+import '../../feature.dart';
+
+class NologController extends GetxController {
+  int selectIndex = 0;
+  List<Widget> screen = [
+    HomeScreen(),
+    StoreScreen(),
+  ];
+  void onChange(int index) {
+    selectIndex = index;
+    update();
+  }
+}

@@ -16,10 +16,10 @@ class RouteHelper {
   static const String paymentScreen = "/payment_method";
   static const String paybyABA = "/pay_by_aba";
   static const String productDetails = "/product_detail";
+  static const String verifyScreen = "/verify_otp_screen";
 
   static const String customerScreen = "/customer_screen";
   static const String forgotPasswordScreen = "/forgot_password_screen";
-  static const String customerDetailsScreen = "/customer_details_screen";
   static const String addCustomerScreen = "/add_customer_screen";
   static const String updateCustomerScreen = "/update_customer_screen";
   static const String addContactScreen = "/add_contact_screen";
@@ -102,6 +102,7 @@ class RouteHelper {
       name: productDetails,
       page: () => ProductDetail(),
     ),
+    GetPage(name: verifyScreen, page: () => const VerifyOtpScreen()),
 
     //   GetPage(
     //       name: forgotPasswordScreen, page: () => const ForgetPasswordScreen()),
