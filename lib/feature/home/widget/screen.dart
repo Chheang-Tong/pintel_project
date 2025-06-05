@@ -296,6 +296,7 @@ class HomeBody extends StatelessWidget {
           image: product.image,
           percendiscount: product.percendiscount,
           pricediscount: product.pricediscount,
+          color: ColorResources.errorColor,
           onTap: () {
             Get.toNamed(
               RouteHelper.productDetails,
@@ -311,6 +312,7 @@ class HomeBody extends StatelessWidget {
               },
             );
           },
+          onFavorite: () {},
         );
       },
     );

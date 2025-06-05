@@ -10,11 +10,13 @@ class ProductCartV2 extends StatefulWidget {
     required this.image,
     required this.percendiscount,
     required this.pricediscount,
-    required this.onTap,
+    required this.color,
+    required this.onTap, required this.onFavorite,
   });
   final String name, image;
   final double percendiscount, pricediscount;
-  final Function onTap;
+  final Color color;
+  final Function onTap,onFavorite;
   @override
   State<ProductCartV2> createState() => _ProductCartV2State();
 }
@@ -24,7 +26,7 @@ class _ProductCartV2State extends State<ProductCartV2> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.all(Dimensions.defaultPadding),
+      // margin: EdgeInsets.all(Dimensions.defaultPadding),
       width: size.width,
       height: size.height,
       decoration: BoxDecoration(
@@ -54,19 +56,22 @@ class _ProductCartV2State extends State<ProductCartV2> {
                 Positioned(
                   top: 4,
                   right: 4,
-                  child: Container(
-                    height: 24,
-                    width: 24,
-                    padding: EdgeInsets.all(Dimensions.smallRadius),
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.defaultRadius),
-                      color: ColorResources.whiteColor.withOpacity(0.25),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.favorite_outline,
-                        size: 18,
+                  child: GestureDetector(
+                    onTap: ()=> widget.onFavorite(),
+                    child: Container(
+                      padding: EdgeInsets.all(Dimensions.smallRadius),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.defaultRadius),
+                        color: ColorResources.whiteColor.withOpacity(0.25),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.favorite_outline,
+                          size: 20,
+                          color: widget.color,
+                        ),
                       ),
                     ),
                   ),

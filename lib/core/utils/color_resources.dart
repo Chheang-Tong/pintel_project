@@ -11,6 +11,8 @@ class ColorResources {
   static const Color shadowColor = Color(0xff3A090B);
   static const Color errorColor = Color(0xffB13439);
   static const Color successColor = Color(0xff34B164);
+  static const Color pendingColor = Color(0xffDE9307);
+  static const Color shippingColor = Color(0xff1F6BCF);
 
   static const Color transparentColor = Colors.transparent;
 
@@ -49,27 +51,24 @@ class ColorResources {
   //   return Get.find<ThemeController>().darkTheme ? cardColorDark : cardColor;
   // }
 
-  // static Color ticketStatusColor(String state) {
-  //   Color color = ColorResources.blueColor;
-  //   switch (state) {
-  //     case '1': // Open
-  //       color = ColorResources.redColor;
-  //       break;
-  //     case '2': // In Progress
-  //       color = ColorResources.greenColor;
-  //       break;
-  //     case '3': // Answered
-  //       color = ColorResources.blueColor;
-  //       break;
-  //     case '4': // On Hold
-  //       color = ColorResources.yellowColor;
-  //       break;
-  //     case '5': // Closed
-  //       color = ColorResources.darkColor;
-  //       break;
-  //   }
-  //   return color;
-  // }
+  static Color orderStatusColor(String state) {
+    Color color = ColorResources.primaryColor;
+    switch (state) {
+      case '1': // Pending
+        color = ColorResources.pendingColor;
+        break;
+      case '2': // Shipping
+        color = ColorResources.shippingColor;
+        break;
+      case '3': // Completed
+        color = ColorResources.successColor;
+        break;
+      case '4': // Cancelled
+        color = ColorResources.primaryColor;
+        break;
+    }
+    return color;
+  }
 
   static Color getblack45() {
     return black45;

@@ -149,7 +149,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const BottomSheetBar(),
+                                        Align(
+                                          alignment: Alignment.topCenter,
+                                          child: Container(
+                                            height: 6,
+                                            width: 32,
+                                            decoration: BoxDecoration(
+                                              color: ColorResources.black45
+                                                  .withValues(alpha: 0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                          ),
+                                        ),
                                         SizedBox(height: Dimensions.space16),
                                         Text(
                                           'Choose Address',
@@ -368,23 +380,5 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       );
     });
-  }
-}
-
-class BottomSheetBar extends StatelessWidget {
-  const BottomSheetBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Container(
-        height: 6,
-        width: 32,
-        decoration: BoxDecoration(
-            color: ColorResources.black45.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(15)),
-      ),
-    );
   }
 }
