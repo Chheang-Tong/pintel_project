@@ -14,7 +14,7 @@ class LogController extends GetxController {
   Map<String, String> title = {
     'Home': 'assets/image/home.svg',
     'Order': 'assets/image/order.svg',
-    'Wish': 'assets/image/favorite.svg',
+    'Wishlist': 'assets/image/favorite.svg',
     'Menu': 'assets/image/list.svg',
   };
   void onChange(int index) {

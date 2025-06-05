@@ -269,7 +269,7 @@ class _Screen01State extends State<Screen01> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
-                  childAspectRatio: 0.80,
+                  childAspectRatio: 0.85,
                 ),
                 delegate: SliverChildBuilderDelegate(
                   childCount: productList.length,
@@ -296,7 +296,7 @@ class _Screen01State extends State<Screen01> {
                           },
                         );
                       },
-                      onFavorite: (){},
+                      onFavorite: () {},
                     );
                   },
                 ),
