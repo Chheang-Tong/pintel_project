@@ -1,3 +1,4 @@
+export 'address/address.dart';
 export 'auth/auth.dart';
 export 'home/home.dart';
 export 'cart/cart.dart';
@@ -11,3 +12,6 @@ export 'check_out/check_out.dart';
 export 'location/location.dart';
 export 'order/order.dart';
 export 'wish/wish.dart';
+export 'notification/notification.dart';
+export 'save_store/save_store.dart';
+export 'profile/profile.dart';
