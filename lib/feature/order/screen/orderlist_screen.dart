@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pintel_project/core/core.dart';
-import 'package:pintel_project/feature/feature.dart';
+
+import '/common/common.dart';
+import '/core/core.dart';
+import '/feature/feature.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -13,21 +15,7 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: SafeArea(
-          child: Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-            ),
-            child: Text(
-              'Order Listing',
-              style: boldOverLarge,
-            ),
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(title: 'Order Listing'),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: Dimensions.largeMagin),
         width: size.width,

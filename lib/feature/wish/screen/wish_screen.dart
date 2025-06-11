@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 // import '/common/common.dart';
 
+import '../../../common/common.dart';
 import '../../../core/core.dart';
 
 class WishScreen extends StatefulWidget {
@@ -15,31 +16,9 @@ class _WishScreenState extends State<WishScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: SafeArea(
-          child: Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-            ),
-            child: Row(
-              children: [
-                Text(
-                  'Wishlist',
-                  style: boldOverLarge,
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {},
-                  child: SvgPicture.asset('assets/image/trash.svg'),
-                ),
-              ],
-            ),
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: 'Wishlist',
       ),
-      // backgroundColor: ColorResources.black75,
       body: Container(
         margin: const EdgeInsets.all(8.0),
         child: GridView.builder(
@@ -216,3 +195,5 @@ class _WishScreenState extends State<WishScreen> {
     );
   }
 }
+
+

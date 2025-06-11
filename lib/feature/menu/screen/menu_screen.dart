@@ -76,19 +76,31 @@ class _MenuScreenState extends State<MenuScreen> {
                   style: boldOverLarge,
                 ),
                 ...List.generate(
-                  controller.menuItems.length,
+                  controller.menuItemss.length,
                   (index) {
-                    String title = controller.menuItems.keys.elementAt(index);
-                    String assets =
-                        controller.menuItems.values.elementAt(index);
+                    final item = controller.menuItemss[index];
                     return menuList(
                       onTap: () {
-                        Get.toNamed(RouteHelper.addContactScreen);
+                        Get.toNamed(item['route']!);
                       },
-                      assets: assets,
-                      title: title,
+                      assets: item['asset']!,
+                      title: item['title']!,
                     );
                   },
+                ),
+                menuList(
+                  onTap: () {
+                    shareDialog(link: 'link');
+                  },
+                  assets: 'assets/image/share.svg',
+                  title: 'Share Store',
+                ),
+                menuList(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.resetPassword);
+                  },
+                  assets: 'assets/image/reset_password.svg',
+                  title: 'Reset Password',
                 ),
                 GestureDetector(
                   onTap: () {

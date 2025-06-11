@@ -1,4 +1,5 @@
 export 'screen/store_screen.dart';
+export 'screen/about_store.dart';
 
 export 'widget/app_bar.dart';
 export 'widget/post_widget.dart';

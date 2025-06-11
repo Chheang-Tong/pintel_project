@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // import '../../common/common.dart';
 
 class ColorResources {
-  static const Color primaryColor = Color(0xffEB1F27);
+  static const Color primaryColor = Color(0xffDE2348);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color blackColor = Color(0xff231F20);
   static const Color bgColor = Color(0xffF0F0F0);
@@ -65,6 +65,28 @@ class ColorResources {
         break;
       case '4': // Cancelled
         color = ColorResources.primaryColor;
+        break;
+    }
+    return color;
+  }
+
+  static Color notificationStatusColor(String state) {
+    Color color = ColorResources.primaryColor;
+    switch (state) {
+      case '1': // Place
+        color = Color(0xFF8F9F5A);
+        break;
+      case '2'://pending
+        color = Color(0xFFE2BE30);
+        break;
+      case '3': // Shipping
+        color = Color(0xFFDA6822);
+        break;
+      case '4': // Completed
+        color = ColorResources.successColor;
+        break;
+      case '5': // Cancelled
+        color = ColorResources.errorColor;
         break;
     }
     return color;
