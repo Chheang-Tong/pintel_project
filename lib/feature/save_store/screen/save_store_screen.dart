@@ -55,6 +55,13 @@ class _SaveStoreScreenState extends State<SaveStoreScreen> {
                 ),
                 child: Stack(
                   children: [
+                    Positioned(
+                        right: -4,
+                        top: -4,
+                        child: GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Icon(Icons.close),
+                        )),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

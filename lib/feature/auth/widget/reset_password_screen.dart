@@ -84,7 +84,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               child: Row(
                 children: [
                   Text(
-                    'New password',
+                    'Confirm New password',
                     style: semiBoldMediumLarge,
                   ),
                   Text(
@@ -100,7 +100,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               onChanged: (onChanged) {},
               noneBorder: true,
               fillColor: ColorResources.black5,
-              hintText: 'Enter New Password',
+              hintText: 'Re-enter Password',
             ),
           ],
         ),

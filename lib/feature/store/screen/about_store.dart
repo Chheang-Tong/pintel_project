@@ -19,26 +19,27 @@ class _AboutStoreState extends State<AboutStore> {
         children: [
           StoreScreen(),
           Positioned(
-              top: 25,
-              left: 10,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: ColorResources.white25,
-                  ),
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: ColorResources.blackColor,
-                    size: 20,
-                  ),
+            top: 26,
+            left: 10,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ColorResources.white25,
                 ),
-              ),),
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: ColorResources.blackColor,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

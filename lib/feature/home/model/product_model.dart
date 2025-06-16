@@ -148,4 +148,16 @@ RxList<Product> productList = <Product>[
     image:
         "https://i.pinimg.com/736x/3f/44/42/3f4442a30a24a85d960247267deb4c3e.jpg",
   ),
+  Product(
+    id: '8',
+    title: "title7",
+    price: 15,
+    pricediscount: 0,
+    percendiscount: 20,
+    stock: 10,
+    description:
+        "A handbag is a fashion accessory designed for carrying personal items such as wallets, keys, cosmetics, phones, and other essentials. It is commonly used by women and comes in various stocks, shapes, materials, and styles to suit different occasions and preferences.",
+    image:
+        "https://i.pinimg.com/736x/91/df/6e/91df6eaeae996d1b2c08da1e87fadb62.jpg",
+  ),
 ].obs;

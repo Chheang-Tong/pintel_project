@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pintel_project/core/core.dart';
+import '/core/core.dart';
 
 class MenuControllers extends GetxController{
  

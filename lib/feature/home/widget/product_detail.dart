@@ -1,8 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pintel_project/common/components/dialog/addtocart.dart';
 import 'package:pintel_project/core/core.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../feature.dart';
 
@@ -32,6 +34,16 @@ class _ProductDetailState extends State<ProductDetail> {
     Color(0xFF6A81DD),
     Color(0xFFE53992),
   ];
+  List<String> imageList = [
+    'https://i.pinimg.com/736x/51/3b/4e/513b4e94057e88cf30a427ec923ac0d8.jpg',
+    'https://i.pinimg.com/736x/60/66/3b/60663b164cf60deb0cfc65466bf6ed56.jpg',
+    'https://i.pinimg.com/736x/07/ee/6b/07ee6b9c2c0575b45da416c86331eeb3.jpg',
+    'https://i.pinimg.com/736x/ec/36/06/ec3606446470f70611c3c51fa22bb595.jpg',
+    'https://i.pinimg.com/736x/c3/9c/06/c39c062e825596c20b8a8b2f8c168b00.jpg',
+  ];
+  int currentIndex = 0;
+  final CarouselSliderController carouselController =
+      CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +51,7 @@ class _ProductDetailState extends State<ProductDetail> {
     final arguments = Get.arguments as Map<String, dynamic>;
     final productId = arguments['id'];
     final productName = arguments['name'];
-    final productImage = arguments['image'];
+    // final productImage = arguments['image'];
     final productPrice = arguments['price'];
     // final productPercentdis = arguments['percentdis'];
     // final productPricedis = arguments['pricedis'];
@@ -53,19 +65,42 @@ class _ProductDetailState extends State<ProductDetail> {
             children: [
               Container(
                 width: size.width,
-                height: size.height * .43,
+                height: size.height * 0.43,
                 color: ColorResources.black75,
                 child: Stack(
                   children: [
                     Positioned.fill(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              productImage,
+                      child: CarouselSlider.builder(
+                        // carouselController: controller.carouselController,
+                        itemCount: imageList.length,
+                        itemBuilder: (
+                          BuildContext context,
+                          int index,
+                          int pageViewIndex,
+                        ) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  imageList[index],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            fit: BoxFit.cover,
-                          ),
+                          );
+                        },
+                        options: CarouselOptions(
+                          scrollDirection: Axis.horizontal,
+                          autoPlay: true,
+                          enlargeCenterPage: false,
+                          viewportFraction: 1,
+                          aspectRatio: 1,
+                          initialPage: 0,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              currentIndex = index;
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -110,6 +145,21 @@ class _ProductDetailState extends State<ProductDetail> {
                         ),
                       ),
                     ),
+                    Positioned(
+                      bottom: 60,
+                      right: 10,
+                      child: AnimatedSmoothIndicator(
+                        activeIndex: currentIndex,
+                        count: imageList.length,
+                        effect: ExpandingDotsEffect(
+                          dotHeight: 7,
+                          dotWidth: 7,
+                          spacing: 4,
+                          dotColor: ColorResources.black25,
+                          activeDotColor: ColorResources.blackColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -117,7 +167,9 @@ class _ProductDetailState extends State<ProductDetail> {
                 child: Container(
                   width: size.width,
                   padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.largePadding, vertical: 0),
+                    horizontal: Dimensions.largePadding,
+                    vertical: 0,
+                  ),
                   color: ColorResources.whiteColor,
                   child: SingleChildScrollView(
                     child: Column(

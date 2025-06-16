@@ -1,6 +1,7 @@
-import 'dart:async';
+// import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_controller.dart';
+// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -18,36 +19,8 @@ class HomeController extends GetxController {
     'bag':'assets/image/bag.svg',
   };
 
-  final PageController pageController = PageController();
+  final  CarouselSliderController carouselController =
+      CarouselSliderController();
   RxInt currentIndex = 0.obs;
 
-  late Timer _timer;
-
-  @override
-  void onInit() {
-    super.onInit();
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
-      if (currentIndex.value < banner.length - 1) {
-        currentIndex.value++;
-      } else {
-        currentIndex.value = 0;
-      }
-      pageController.animateToPage(
-        currentIndex.value,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    });
-  }
-
-  @override
-  void onClose() {
-    _timer.cancel();
-    pageController.dispose();
-    super.onClose();
-  }
-
-  void onPageChanged(int index) {
-    currentIndex.value = index;
-  }
 }

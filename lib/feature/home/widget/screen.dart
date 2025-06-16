@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -83,23 +84,30 @@ class _ScreenState extends State<Screen> {
                     child: Stack(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: PageView.builder(
-                            controller: controller.pageController,
-                            itemCount: controller.banner.length,
-                            onPageChanged: (index) =>
-                                controller.onPageChanged(index),
-                            physics: PageScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return Image.asset(
-                                controller.banner[index],
-                                fit: BoxFit.cover,
-                                width: size.width,
-                              );
-                            },
-                          ),
-                        ),
+                            borderRadius: BorderRadius.circular(16),
+                            child: CarouselSlider.builder(
+                              carouselController: controller.carouselController,
+                              itemCount: controller.banner.length,
+                              itemBuilder: (BuildContext context, int index,
+                                  int pageViewIndex) {
+                                return Image.asset(
+                                  controller.banner[index],
+                                  fit: BoxFit.cover,
+                                  width: size.width,
+                                );
+                              },
+                              options: CarouselOptions(
+                                scrollDirection: Axis.vertical,
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                                viewportFraction: 1,
+                                aspectRatio: 1,
+                                initialPage: 1,
+                                onPageChanged: (index, reason) {
+                                  controller.currentIndex.value = index;
+                                },
+                              ),
+                            )),
                         Positioned(
                           top: 15,
                           bottom: 15,

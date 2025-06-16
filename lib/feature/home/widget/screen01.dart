@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -64,198 +65,222 @@ class _Screen01State extends State<Screen01> {
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      vertical: 8,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        vertical: 8,
+                        // horizontal: 8,
+                      ),
+                      height: size.height * 0.172,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: ColorResources.black45,
+                      ),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: CarouselSlider.builder(
+                                carouselController:
+                                    controller.carouselController,
+                                itemCount: controller.banner.length,
+                                itemBuilder: (
+                                  BuildContext context,
+                                  int index,
+                                  int pageViewIndex,
+                                ) {
+                                  return Container(
+                                    width: size.width,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          controller.banner[index],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                options: CarouselOptions(
+                                  height: size.height * 0.173,
+                                  scrollDirection: Axis.vertical,
+                                  autoPlay: true,
+                                  enlargeCenterPage: false,
+                                  viewportFraction: 1,
+                                  aspectRatio: 16 / 9,
+                                  initialPage: 0,
+                                  onPageChanged: (index, reason) {
+                                    controller.currentIndex.value = index;
+                                  },
+                                ),
+                              )),
+                          Positioned(
+                            top: 15,
+                            bottom: 15,
+                            left: 0,
+                            child: Container(
+                              height: size.height * 0.1,
+                              width: size.width * 0.07,
+                              decoration: BoxDecoration(
+                                color: ColorResources.white25,
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                ),
+                              ),
+                              child: Obx(
+                                () => Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ...List.generate(
+                                      controller.banner.length,
+                                      (index) {
+                                        return Container(
+                                          height: 12,
+                                          width: 4,
+                                          margin: EdgeInsets.all(3),
+                                          padding: EdgeInsets.all(1),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: controller
+                                                      .currentIndex.value ==
+                                                  index
+                                              ? Container(
+                                                  height: size.height,
+                                                  width: size.width,
+                                                  decoration: BoxDecoration(
+                                                    color: ColorResources
+                                                        .primaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                  ),
+                                                )
+                                              : null,
+                                        );
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                    height: size.height * 0.172,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: ColorResources.black45,
-                    ),
-                    child: Stack(
+                    Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: PageView.builder(
-                            controller: controller.pageController,
-                            itemCount: controller.banner.length,
-                            onPageChanged: (index) =>
-                                controller.onPageChanged(index),
-                            physics: PageScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return Image.asset(
-                                controller.banner[index],
-                                fit: BoxFit.cover,
-                                width: size.width,
-                              );
-                            },
+                        Expanded(
+                          child: CustomTextField(
+                            borderRadius: 32,
+                            isPrefixIcon: true,
+                            fillColor: ColorResources.transparentColor,
+                            hintText: 'Search for Product',
+                            inputAction: TextInputAction.done,
+                            onChanged: (onChanged) {},
                           ),
                         ),
-                        Positioned(
-                          top: 15,
-                          bottom: 15,
-                          left: 0,
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteHelper.filterScreen);
+                          },
                           child: Container(
-                            height: size.height * 0.1,
-                            width: size.width * 0.07,
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 4,
+                            ),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: ColorResources.white25,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                              ),
+                              shape: BoxShape.circle,
+                              color: ColorResources.black5,
                             ),
-                            child: Obx(
-                              () => Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ...List.generate(
-                                    controller.banner.length,
-                                    (index) {
-                                      return Container(
-                                        height: 12,
-                                        width: 4,
-                                        margin: EdgeInsets.all(3),
-                                        padding: EdgeInsets.all(1),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: controller.currentIndex.value ==
-                                                index
-                                            ? Container(
-                                                height: size.height,
-                                                width: size.width,
-                                                decoration: BoxDecoration(
-                                                  color: ColorResources
-                                                      .primaryColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                ),
-                                              )
-                                            : null,
-                                      );
-                                    },
-                                  )
-                                ],
-                              ),
-                            ),
+                            child: SvgPicture.asset('assets/image/filter.svg'),
                           ),
                         )
                       ],
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextField(
-                          borderRadius: 32,
-                          isPrefixIcon: true,
-                          fillColor: ColorResources.transparentColor,
-                          hintText: 'Search for Product',
-                          inputAction: TextInputAction.done,
-                          onChanged: (onChanged) {},
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        'Category',
+                        style: boldExtraLarge,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RouteHelper.filterScreen);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 4,
-                          ),
-                          padding: EdgeInsets.all(12),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: size.width * 0.13,
+                          width: size.width * 0.13,
+                          margin: EdgeInsets.all(4),
+                          alignment: Alignment.center,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: ColorResources.black5,
+                            color: ColorResources.primaryColor,
                           ),
-                          child: SvgPicture.asset('assets/image/filter.svg'),
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      'Category',
-                      style: boldExtraLarge,
-                    ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: size.width * 0.13,
-                        width: size.width * 0.13,
-                        margin: EdgeInsets.all(4),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorResources.primaryColor,
-                        ),
-                        child: Text(
-                          'All',
-                          style: semiBoldDefault.copyWith(
-                            color: ColorResources.whiteColor,
+                          child: Text(
+                            'All',
+                            style: semiBoldDefault.copyWith(
+                              color: ColorResources.whiteColor,
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              ...controller.cate.entries.map(
-                                (entry) {
-                                  return Column(
-                                    children: [
-                                      Container(
-                                        height: size.width * .13,
-                                        width: size.width * .13,
-                                        margin: EdgeInsets.symmetric(
-                                          horizontal: 8,
-                                          vertical: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: ColorResources.black45,
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                ...controller.cate.entries.map(
+                                  (entry) {
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          height: size.width * .13,
+                                          width: size.width * .13,
+                                          margin: EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 4,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: ColorResources.black45,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child:
+                                                SvgPicture.asset(entry.value),
                                           ),
                                         ),
-                                        child: Center(
-                                          child: SvgPicture.asset(entry.value),
-                                        ),
-                                      ),
-                                      Text(
-                                        entry.key,
-                                        style: regularDefault.copyWith(),
-                                      )
-                                    ],
-                                  );
-                                },
-                              ),
-                            ],
+                                        Text(
+                                          entry.key,
+                                          style: regularDefault.copyWith(),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      'Enjoy Shopping',
-                      style: boldMediumLarge,
+                      ],
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        'Enjoy Shopping',
+                        style: boldMediumLarge,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             SliverPadding(
