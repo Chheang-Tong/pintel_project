@@ -1,6 +1,10 @@
+import 'dart:io';
+
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pintel_project/common/common.dart';
 import 'package:pintel_project/core/core.dart';
 
@@ -11,6 +15,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  // final List<PlatformFile> _pickedFiles = [];
+  XFile? _pickedPhoto;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,9 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                             width: 99,
                             height: 99,
-                            margin: EdgeInsets.only(
-                              top: 35,
-                            ),
+                            margin: EdgeInsets.only(top: 35),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: ColorResources.black5,
@@ -65,29 +70,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
+                                Center(
+                                  child: _pickedPhoto != null
+                                      ? ClipOval(
+                                          child: Image.file(
+                                            File(_pickedPhoto!.path),
+                                            width: 90,
+                                            height: 90,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : SvgPicture.asset(
+                                          'assets/image/user.svg',
+                                          height: 70,
+                                        ),
+                                ),
                                 Positioned(
                                   bottom: 5,
                                   right: -12,
-                                  child: Container(
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: ColorResources.whiteColor,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      'assets/image/camera.svg',
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      final ImagePicker picker = ImagePicker();
+                                      final XFile? photo =
+                                          await picker.pickImage(
+                                        source: ImageSource.gallery,
+                                      );
+                                      if (photo != null) {
+                                        setState(() {
+                                          _pickedPhoto = photo;
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: ColorResources.whiteColor,
+                                      ),
+                                      child: SvgPicture.asset(
+                                        'assets/image/camera.svg',
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Center(
-                                  child: SvgPicture.asset(
-                                    'assets/image/user.svg',
-                                    height: 70,
-                                  ),
-                                )
                               ],
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -158,17 +186,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: Dimensions.space20),
                   textField(
                     title: 'Email Address',
                     textInputType: TextInputType.emailAddress,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: Dimensions.space20),
                   textField(
                     title: 'Phone Number',
                     textInputType: TextInputType.number,
                     inputAction: TextInputAction.done,
                   ),
+                  SizedBox(height: Dimensions.space20),
                 ],
               ),
             ),

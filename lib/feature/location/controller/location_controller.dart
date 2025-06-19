@@ -12,6 +12,8 @@ class LocationController extends GetxController {
   final loc.Location location = loc.Location();
 
   Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
+  Rx<LatLng?> mainLocation = Rxn<LatLng>();
+
   Rx<LatLng?> newLocation = Rx<LatLng?>(null);
 
   RxString address = ''.obs;
@@ -26,6 +28,8 @@ class LocationController extends GetxController {
   void onInit() {
     super.onInit();
     _loadCustomIcons();
+
+    mainLocation.value = LatLng(11.544641, 104.902040);
     getLocation();
   }
 
@@ -116,9 +120,6 @@ class LocationController extends GetxController {
 
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
-        // address.value =
-        //     "${place.subThoroughfare ?? ''} ${place.street ?? ''}, ${place.locality ?? ''}, ${place.country ?? ''}"
-        //         .trim();
         address.value =
             "${place.subThoroughfare ?? ''} ${place.street ?? ''}, ${place.locality ?? ''}, ${place.country ?? ''}"
                 .trim();

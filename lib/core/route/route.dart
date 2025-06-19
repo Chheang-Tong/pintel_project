@@ -25,6 +25,13 @@ class RouteHelper {
   static const String resetPassword = "/reset_password_screen";
   static const String createAddress = "/create_address";
   static const String editAddress = "/edit_address";
+   static const String orderPlaced = "/order_placed";
+  static const String orderPending = "/order_pending";
+  static const String orderShipping = "/order_shipping";
+  static const String orderComplete = "/order_complete";
+  static const String orderCancel = "/order_cancel";
+
+
 
   List<GetPage> routes = [
     GetPage(
@@ -97,6 +104,11 @@ class RouteHelper {
       page: () => const ResetPasswordScreen(),
     ),
     GetPage(name: createAddress, page:()=>CreateAddress(),),
-    GetPage(name: editAddress, page:()=>EditAddress())
+    GetPage(name: editAddress, page:()=>EditAddress()),
+    GetPage(name: orderPlaced, page:()=>OrderPlaced()),
+    GetPage(name: orderPending, page: ()=>OrderPending()),
+    GetPage(name: orderShipping, page: ()=>OrderShipping()),
+    GetPage(name: orderComplete, page:()=>OrderComplete()),
+    GetPage(name: orderCancel, page: ()=>OrderCancel()),
   ];
 }

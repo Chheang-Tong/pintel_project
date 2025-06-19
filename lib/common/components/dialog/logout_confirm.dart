@@ -6,47 +6,43 @@ import '../../../core/core.dart';
 logoutDialogs({required Function tap}) {
   return Get.defaultDialog(
       title: 'Logout Confirm'.tr,
-      titlePadding: EdgeInsets.all(8),
-      middleText: 'Are you sure you want to Logout from this store?'.tr,
+      titlePadding: EdgeInsets.only(top: 18),
+      middleText: 'Are you sure you want to Logout from your account?'.tr,
       middleTextStyle: TextStyle(),
       confirmTextColor: ColorResources.whiteColor,
       radius: 16,
-      confirm: SizedBox(
-        height: 40,
-        width: 120,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            backgroundColor: ColorResources.primaryColor,
+      confirm: GestureDetector(
+        onTap: () => tap(),
+        child: Container(
+          height: 40,
+          width: 120,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: ColorResources.primaryColor,
           ),
-          onPressed: () => tap(),
           child: Text(
-            'Yes',
-            style: semiBoldDefault.copyWith(
+            'Ok',
+            style: semiBoldMediumLarge.copyWith(
               color: ColorResources.whiteColor,
             ),
           ),
         ),
       ),
-      cancel: SizedBox(
-        height: 40,
-        width: 120,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ColorResources.whiteColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
+      cancel: GestureDetector(
+        onTap: () => Get.back(),
+        child: Container(
+          height: 40,
+          width: 120,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: ColorResources.black5,
           ),
-          onPressed: () {
-            Get.back();
-          },
           child: Text(
             'Cancel',
-            style: semiBoldDefault.copyWith(
-              color: ColorResources.successColor,
+            style: semiBoldMediumLarge.copyWith(
+              color: ColorResources.black75,
             ),
           ),
         ),

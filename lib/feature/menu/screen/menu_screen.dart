@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:pintel_project/feature/menu/screen/test.dart';
 
 import '../../feature.dart';
 import '/common/common.dart';
@@ -30,32 +31,35 @@ class _MenuScreenState extends State<MenuScreen> {
               children: [
                 Row(
                   children: [
-                    Container(
-                      height: 64,
-                      width: 64,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: Dimensions.largeMagin,
-                        vertical: Dimensions.defaultMagin,
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: ColorResources.black10,
-                          width: 5,
-                        ),
-                      ),
+                    GestureDetector(
+                      onDoubleTap: () => Get.to(Testing()),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: ColorResources.black5,
-                          shape: BoxShape.circle,
-                          // image: DecorationImage(
-                          //   image: AssetImage('assets/image/fashion.png'),
-                          //   fit: BoxFit.cover,
-                          // ),
+                        height: 64,
+                        width: 64,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: Dimensions.largeMagin,
+                          vertical: Dimensions.defaultMagin,
                         ),
-                        child: SvgPicture.asset(
-                          'assets/image/user.svg',
-                          fit: BoxFit.cover,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: ColorResources.black10,
+                            width: 5,
+                          ),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorResources.black5,
+                            shape: BoxShape.circle,
+                            // image: DecorationImage(
+                            //   image: AssetImage('assets/image/fashion.png'),
+                            //   fit: BoxFit.cover,
+                            // ),
+                          ),
+                          child: SvgPicture.asset(
+                            'assets/image/user.svg',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -344,7 +348,9 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 SizedBox(height: Dimensions.space30),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    logoutDialogs(tap: () {});
+                  },
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: Dimensions.largeMagin,

@@ -33,31 +33,29 @@ class _LocationState extends State<Location> {
                   ? AnimatedLoadingIndicator()
                   : GoogleMap(
                       mapType: controller.mapType.value,
-                      liteModeEnabled: widget.move, //can't move on
+                      liteModeEnabled:
+                          widget.move, // disable map interaction if true
                       zoomControlsEnabled: false,
                       onMapCreated: (GoogleMapController mapCtrl) async {
-                        // controller.mapController.complete(mapCtrl);
                         if (!controller.mapController.isCompleted) {
                           controller.mapController.complete(mapCtrl);
                         }
                       },
-
                       initialCameraPosition: CameraPosition(
-                        target: controller.currentLocation.value!,
-                        zoom: 20,
+                        target: controller.mainLocation.value ??
+                            controller.currentLocation.value!,
+                        zoom: 16,
                       ),
-
                       markers: {
-                        if (controller.currentLocationMarker.value != null)
-                          controller.currentLocationMarker.value!,
-                        if (controller.selectedLocationIcon.value != null &&
-                            controller.currentLocation.value != null)
+                        if (controller.mainLocation.value != null &&
+                            controller.selectedLocationIcon.value != null)
                           Marker(
-                            markerId: const MarkerId('selected_location'),
-                            position: controller.currentLocation.value!,
+                            markerId: const MarkerId('main_location'),
+                            position: controller.mainLocation.value!,
                             icon: controller.selectedLocationIcon.value!,
                           ),
                       },
+
                       onCameraMove: controller.onCameraMove,
                       onCameraIdle: controller.onCameraIdle,
                     ),
@@ -106,8 +104,7 @@ class _LocationState extends State<Location> {
                     ),
                     VerticalDivider(),
                     GestureDetector(
-                      onTap: () =>
-                          controller.changeMapType(MapType.satellite),
+                      onTap: () => controller.changeMapType(MapType.satellite),
                       child: Text('Satellite'),
                     ),
                   ],

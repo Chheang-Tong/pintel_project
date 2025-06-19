@@ -17,31 +17,36 @@ class _NotificationScreenState extends State<NotificationScreen> {
       "title": "Order Placed",
       "subtitle": "Your order has been placed.",
       "icon": "assets/image/download.svg",
-      "color": "1"
+      "color": "1",
+      "toName": RouteHelper.orderPlaced,
     },
     {
       "title": "Order Pending",
       "subtitle": "Your order is pending.",
       "icon": "assets/image/clock.svg",
-      "color": "2"
+      "color": "2",
+      "toName": RouteHelper.orderPending,
     },
     {
       "title": "Order Shipping",
       "subtitle": "Your order has been shipped.",
       "icon": "assets/image/shipping.svg",
-      "color": "3"
+      "color": "3",
+      "toName": RouteHelper.orderShipping,
     },
     {
       "title": "Order Complete",
       "subtitle": "Your order has been completed.",
       "icon": "assets/image/done.svg",
-      "color": "4"
+      "color": "4",
+      "toName": RouteHelper.orderComplete,
     },
     {
       "title": "Order Cancelled",
       "subtitle": "Your order has been cancelled.",
       "icon": "assets/image/cancel.svg",
-      "color": "5"
+      "color": "5",
+      "toName": RouteHelper.orderCancel,
     },
   ];
   @override
@@ -71,71 +76,77 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     notiList.length,
                     (index) {
                       final noti = notiList[index];
-                      return Container(
-                        width: size.width,
-                        margin: EdgeInsets.only(top: Dimensions.largeMagin),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: ColorResources.black5,
+                      return GestureDetector(
+                        onTap: () {
+                          Get.toNamed(noti['toName']!);
+                        },
+                        child: Container(
+                          width: size.width,
+                          margin: EdgeInsets.only(top: Dimensions.largeMagin),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: ColorResources.black5,
+                              ),
                             ),
                           ),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(right: 16),
-                                  padding: EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color:
-                                        ColorResources.notificationStatusColor(
-                                      noti['color']!,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    padding: EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ColorResources
+                                          .notificationStatusColor(
+                                        noti['color']!,
+                                      ),
+                                    ),
+                                    child: SvgPicture.asset(
+                                      noti['icon']!,
+                                      color: ColorResources.whiteColor,
+                                      height: 32,
                                     ),
                                   ),
-                                  child: SvgPicture.asset(
-                                    noti['icon']!,
-                                    color: ColorResources.whiteColor,
-                                    height: 32,
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          noti['title']!,
+                                          style: semiBoldMediumLarge,
+                                        ),
+                                        Text(
+                                          noti['subtitle']!,
+                                          style: regularDefault,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        noti['title']!,
-                                        style: semiBoldMediumLarge,
-                                      ),
-                                      Text(
-                                        noti['subtitle']!,
-                                        style: regularDefault,
+                                        '31/12/2024',
+                                        style: mediumDefault.copyWith(
+                                          color: ColorResources.black75,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      '31/12/2024',
-                                      style: mediumDefault.copyWith(
-                                        color: ColorResources.black75,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: Dimensions.space16,
-                            )
-                          ],
+                                ],
+                              ),
+                              SizedBox(
+                                height: Dimensions.space16,
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },
