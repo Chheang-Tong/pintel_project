@@ -6,6 +6,7 @@ export 'dialog/warning_dialog.dart';
 export 'dialog/share_dialog.dart';
 export 'dialog/confirm_clear.dart';
 export 'dialog/logout_confirm.dart';
+export 'dialog/delete_confirm.dart';
 export 'indicators/custom_dot_indicator.dart';
 export 'indicators/dot_divider.dart';
 export 'will_pop/will_pop_widget.dart';

@@ -112,17 +112,26 @@ class _AddressScreenState extends State<AddressScreen> {
                         width: Dimensions.space16,
                       ),
                       Expanded(
-                        child: Container(
-                          height: 32,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: ColorResources.primaryColor,
-                          ),
-                          child: Text(
-                            'Delete',
-                            style: mediumLarge.copyWith(
-                              color: ColorResources.whiteColor,
+                        child: GestureDetector(
+                          onTap: () {
+                            deleteConfirm(
+                              onTap: () {
+                                Get.back();
+                              },
+                            );
+                          },
+                          child: Container(
+                            height: 32,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: ColorResources.primaryColor,
+                            ),
+                            child: Text(
+                              'Delete',
+                              style: mediumLarge.copyWith(
+                                color: ColorResources.whiteColor,
+                              ),
                             ),
                           ),
                         ),

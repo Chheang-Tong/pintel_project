@@ -11,32 +11,50 @@ class AboutStore extends StatefulWidget {
 class _AboutStoreState extends State<AboutStore> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      //  appBar: AppBar(
-      //    title:Text('AboutStore'),
-      //   ),
       body: Stack(
         children: [
-          StoreScreen(),
           Positioned(
-            top: 26,
-            left: 10,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: ColorResources.white25,
-                ),
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: ColorResources.blackColor,
-                  size: 20,
-                ),
+            top: 30,
+            child: SizedBox(
+              width: size.width,
+              height: size.height,
+              child: StoreScreen(),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              width: size.width,
+              height: 75,
+              color: ColorResources.bgColor,
+              child: Column(
+                children: [
+                  SizedBox(height: 40),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: ColorResources.blackColor,
+                          // size: 20,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'About Store',
+                        style: boldOverLarge,
+                      )
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
