@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'package:flutter/services.dart';
+
 import '/core/core.dart';
 import '/common/common.dart';
 import 'package:get/get.dart';
@@ -6,6 +9,7 @@ import 'core/service/di_services.dart' as services;
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
+  runZonedGuarded(() {}, (_, __) {});
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
   Get.lazyPut(() => sharedPreferences);
@@ -23,6 +27,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //test code from aia
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: ColorResources.transparentColor,
+        systemNavigationBarColor: ColorResources.whiteColor,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return GetBuilder<LocalizationController>(
         builder: (localizationController) {
       return GetMaterialApp(
@@ -38,10 +53,7 @@ class MyApp extends StatelessWidget {
           localizationController.locale.languageCode,
           localizationController.locale.countryCode,
         ),
-       
       );
     });
   }
 }
-
-

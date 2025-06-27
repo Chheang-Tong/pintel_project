@@ -14,6 +14,7 @@ class _AboutStoreState extends State<AboutStore> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Positioned(
             top: 30,

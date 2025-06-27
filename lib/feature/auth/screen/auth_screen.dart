@@ -41,6 +41,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                           
                             SizedBox(
                               child: TabBar(
                                 controller: controller.tabController,

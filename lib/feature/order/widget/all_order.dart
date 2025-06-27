@@ -38,7 +38,7 @@ class AllOrder extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Customer Name',
+                        'Customer Name $index',
                         style: boldMediumLarge,
                       ),
                       Text('\$55.00', style: mediumLarge),
